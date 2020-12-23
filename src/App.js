@@ -1,25 +1,58 @@
-import logo from './logo.svg';
-import './App.css';
+import styled, {ThemeProvider} from 'styled-components'
+import {Style} from './utils/GlobalStyle'
+import {lightTheme} from './utils/Theme'
+
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+
+import Header from './components/header'
+
+import Home from './routes/home'
+import Job from './routes/job'
+
+import {StyledApp} from './AppStyle'
+
+function NotFound() {
+  return (
+    <p>Sorry, nothing found</p>
+  )
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={lightTheme}>
+      <Style />
+      <StyledApp className="app">
+        <Router>
+          <Header />
+          <Switch>
+            <Route exact path='/'>
+              <Home />
+            </Route>
+            <Route exact path='/job/:id'>
+              <Job />
+            </Route>            
+            <Route component={NotFound}/>
+          </Switch>
+        </Router>
+        <StyledFooter>
+          <span>Bojan Peric <a href="https://devchallenges.io/">@DevChallenges.io</a></span>
+        </StyledFooter>
+      </StyledApp>
+    </ThemeProvider>
   );
 }
 
 export default App;
+
+
+const StyledFooter = styled.div`
+  height: 100px;
+  padding-bottom: 30px;
+  margin-top:50px;
+  color: var(--text-color-light);
+  text-align: center;
+  a {
+    text-decoration: none;
+    color: var(--text-color-light);
+  }
+`
