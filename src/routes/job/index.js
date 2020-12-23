@@ -13,7 +13,7 @@ const Job = () => {
     const [loading, setLoading] = useState(false)
 
     async function fetchJobDetails() {
-        const req = await fetch(`https://thingproxy.freeboard.io/fetch/https://jobs.github.com/positions/${id}.json`)
+        const req = await fetch(`https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions/${id}.json`)
         const res = await req.json()
         setJobDetails(res)        
     }
