@@ -24,7 +24,7 @@ const JobCard = ({img, company, position, fulltime, location, datePosted,onClick
                 
                 <div className='body_footer'>
                      <div className='left'>
-                         {fulltime &&<div className='full_time'>Full Time</div>}
+                         {fulltime &&<div className='full_time_btn'>Full Time</div>}
                      </div>
 
                     <div className='right'>

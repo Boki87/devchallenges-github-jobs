@@ -69,7 +69,7 @@ export const StyledJobCard = styled.div`
             align-items: center;
             flex-wrap: wrap;
 
-            .full_time {
+            .full_time_btn {
                 border: 1px solid var(--text-color);
                 color: var(--text-color);
                 display:flex;
@@ -80,7 +80,7 @@ export const StyledJobCard = styled.div`
                 height: 30px;
                 padding: 0px 5px;
                 border-radius: 4px;
-                width: 70px;
+                width: 80px;
                 margin-right: 20px;
             }
             .left {
