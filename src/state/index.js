@@ -33,7 +33,9 @@ const StateProvider = ({children}) => {
     }
 
 
-    const searchJobs = async () => {        
+    const searchJobs = async () => { 
+        console.log(11111);
+        setPage(0)
         setLoadingData(true)
         let description = descriptionSearchQuery != '' ? descriptionSearchQuery + `&` : ''
         
@@ -47,6 +49,7 @@ const StateProvider = ({children}) => {
             const req = await fetch(`https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?${description}${isFullTime}${location}`)
             const res = await req.json()
             setJobs(res)
+            setNumOfPages(res.length/numOfJobsPerPage)
             setLoadingData(false)
         }catch(err) {
             setLoadingData(false)
@@ -76,7 +79,8 @@ const StateProvider = ({children}) => {
             setLocationSearchQuery,
             setFullTime,
             loadingData,
-            setLoadingData
+            setLoadingData,
+            setPage
         }}>
             {children}
         </AppContext.Provider>

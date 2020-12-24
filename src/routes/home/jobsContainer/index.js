@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react'
 import styled from 'styled-components'
+import ReactPaginate from 'react-paginate'
 import { useHistory } from "react-router-dom";
 
 import JobCard from '../../../components/jobCard'
@@ -43,8 +44,8 @@ const StyledLoader = styled.div`
 
 const JobsContainer = () => {
     const history = useHistory();
-    const {jobs, numOfJobsPerPage, page, numOfPages, loadingData} = useAppContext()
-
+    const {jobs, numOfJobsPerPage, page, numOfPages, loadingData, setPage} = useAppContext()
+    
     const [jobsPerPage, setJobsPerPage] = useState([])
 
     useEffect(() => {
@@ -58,6 +59,10 @@ const JobsContainer = () => {
 
     const openJobPosting = (id) => {        
         history.push(`/job/${id}`)
+    }
+
+    const paginationClickHandler = ({selected}) => {        
+        setPage(selected)
     }
 
     return (
@@ -85,6 +90,20 @@ const JobsContainer = () => {
                 />
             )}
             
+            <div>
+                <ReactPaginate                     
+                    onPageChange={paginationClickHandler}
+                    previousLabel={<span className="material-icons">navigate_before</span>}
+                    nextLabel={<span className="material-icons">keyboard_arrow_right</span>}
+                    containerClassName="pagination_container"
+                    activeClassName={'active_pagination'}
+                    pageCount={numOfPages}       
+                    forcePage={page}             
+                    pageRangeDisplayed={2}
+                    marginPagesDisplayed={1}
+                />
+            </div>
+
         </StyledJobsContainer>
     )
 }

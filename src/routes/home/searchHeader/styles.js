@@ -15,13 +15,13 @@ export const StyledSearchHeader = styled.div`
     .search_container {
         width: 70%;
         max-width: 800px;
-        min-width: 330px;
+        min-width: 200px;
         margin: 0px 10px;
         height: 55px;
         background: #fff;
         border-radius: 4px;
         display:flex;
-
+        overflow: hidden;
         .material-icons {
             width: 40px;
             height:100%;
