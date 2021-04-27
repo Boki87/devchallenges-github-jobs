@@ -1,37 +1,36 @@
-import {useEffect, useState} from 'react'
-import {useParams} from 'react-router-dom'
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
-import JobSidebar from './sidebar'
-import JobDetails from './details'
+import JobSidebar from "./sidebar";
+import JobDetails from "./details";
 
-import {StyledJob} from './styles'
+import { StyledJob } from "./styles";
 
 const Job = () => {
-    let { id } = useParams();
-    
-    const [jobDetails, setJobDetails] = useState({})
-    const [loading, setLoading] = useState(false)
+  let { id } = useParams();
 
-    async function fetchJobDetails() {
-        const req = await fetch(`https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions/${id}.json`)
-        const res = await req.json()
-        setJobDetails(res)        
-    }
+  const [jobDetails, setJobDetails] = useState({});
+  const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-        fetchJobDetails()
-    }, [id])
+  async function fetchJobDetails() {
+    const req = await fetch(
+      `https://api.allorigins.win/raw?url=https://jobs.github.com/positions/${id}.json`
+    );
+    const res = await req.json();
+    setJobDetails(res);
+  }
 
+  useEffect(() => {
+    fetchJobDetails();
+  }, [id]);
 
-    return (
-        <StyledJob>
-                
-                <JobSidebar how_to_apply={jobDetails.how_to_apply}/>
-                
-                
-                <JobDetails details={jobDetails} loading={loading}/>
-        </StyledJob>
-    )
-}
+  return (
+    <StyledJob>
+      <JobSidebar how_to_apply={jobDetails.how_to_apply} />
 
-export default Job
+      <JobDetails details={jobDetails} loading={loading} />
+    </StyledJob>
+  );
+};
+
+export default Job;
